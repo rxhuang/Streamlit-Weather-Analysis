@@ -20,6 +20,13 @@ def load_data(path):
 
 weather=load_data("weather.csv")
 
+#part0: map of our stations
+st.title("Locations of our data gathering stations")
+
+weather1 = weather[weather['state'] != 'MP']
+weather1 = weather1[weather1['state'] != 'GU']
+st.map(weather1[['latitude','longitude']],1.7)
+
 #part1: a table with average temperature, windspeed snow, precipitation elevation, for each state, cna choose time range
 st.title("Average measurement for each state")
 
@@ -30,7 +37,7 @@ table_weather['month'] = table_weather['month'].astype(int)
 #choose measurement
 cols = ['state','elevation','Average temperature (F)','Average daily wind speed (miles / hour)', "Snow depth (inch)",'Snowfall (inch)','Precipitation (inch)']
 st_ms = st.multiselect("Please select measurements of your interest", table_weather.columns.tolist(), default=cols)
-
+ 
 #choose month
 months = st.slider("Please select range of month of your interest", min(table_weather.month), max(table_weather.month), (min(table_weather.month),max(table_weather.month)))
 table_weather=table_weather[(table_weather['month']<=months[1]) & (table_weather['month']>=months[0])]
@@ -98,3 +105,31 @@ bar = alt.Chart(table_elevation).mark_bar().encode(
 ).properties(width=600,height=400)
 
 st.write(bar)
+
+#part 4 top 10 states
+st.title("Top 10 states to travel to!")
+option1 = st.selectbox(
+    'Which month are you planning to travel?',
+     range(min(weather.month),max(weather.month)+1))
+sc = weather[weather['month'] == option1]
+sc = sc[['state','Precipitation (inch)','Average temperature (F)']]
+sc = sc.groupby(['state'], as_index=False).mean()
+
+option2 = st.selectbox(
+    'What is the ideal average temperature (F) for you?',
+     range(int(min(sc['Average temperature (F)'])),int(max(sc['Average temperature (F)']))))
+option3 = st.selectbox(
+    'What is the ideal average precipitation (inch) for you?',
+     np.arange(0,round(max(sc['Precipitation (inch)']),2),0.01))
+
+
+sc['score'] = abs(sc['Average temperature (F)']-option2)+abs(sc['Precipitation (inch)']-option3)*100
+sc = sc.sort_values(by=['score'], ascending=[True]).head(10)
+sc = sc[['state','Precipitation (inch)','Average temperature (F)']]
+
+scatter_chart = st.altair_chart(
+    alt.Chart(sc)
+        .mark_circle(size=60)
+        .encode(x='Average temperature (F)', y='Precipitation (inch)', color='state')
+        .interactive()
+)
