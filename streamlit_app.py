@@ -30,7 +30,7 @@ table_weather['month'] = table_weather['month'].astype(int)
 #choose measurement
 cols = ['state','elevation','Average temperature (F)','Average daily wind speed (miles / hour)', "Snow depth (inch)",'Snowfall (inch)','Precipitation (inch)']
 st_ms = st.multiselect("Please select measurements of your interest", table_weather.columns.tolist(), default=cols)
-
+ 
 #choose month
 months = st.slider("Please select range of month of your interest", min(table_weather.month), max(table_weather.month), (min(table_weather.month),max(table_weather.month)))
 table_weather=table_weather[(table_weather['month']<=months[1]) & (table_weather['month']>=months[0])]
