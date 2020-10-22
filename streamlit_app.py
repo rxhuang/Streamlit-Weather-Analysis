@@ -103,7 +103,7 @@ table_elevation=table_elevation.groupby(pd.cut(table_elevation["elevation"], np.
 table_elevation['elevation']=(table_elevation['elevation']//500*500).astype(int).astype(str)+"-"+(table_elevation['elevation']//500*500+500).astype(int).astype(str)
 bar = alt.Chart(table_elevation).mark_bar().encode(    
 	alt.Y(option, scale=alt.Scale(zero=False)),    
-	alt.X("elevation", scale=alt.Scale(zero=False)),    
+	alt.X("elevation", scale=alt.Scale(zero=False),sort=False),    
 ).properties(width=600,height=400)
 
 st.write(bar)
