@@ -20,6 +20,13 @@ def load_data(path):
 
 weather=load_data("weather.csv")
 
+#part0: map of our stations
+st.title("Locations of our data gathering stations")
+
+weather1 = weather[weather['state'] != 'MP']
+weather1 = weather1[weather1['state'] != 'GU']
+st.map(weather1[['latitude','longitude']].dropna(),1.7)
+
 #part1: a table with average temperature, windspeed snow, precipitation elevation, for each state, cna choose time range
 st.title("Average measurement for each state")
 
@@ -113,7 +120,7 @@ option2 = st.selectbox(
      range(int(min(sc['Average temperature (F)'])),int(max(sc['Average temperature (F)']))))
 option3 = st.selectbox(
     'What is the ideal average precipitation (inch) for you?',
-     np.arange(0,round(max(sc['Precipitation (inch)']),2),0.01))
+     np.arange(0,int(max(sc['Precipitation (inch)'])*100),1)/100)
 
 
 sc['score'] = abs(sc['Average temperature (F)']-option2)+abs(sc['Precipitation (inch)']-option3)*100
