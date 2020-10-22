@@ -3,13 +3,14 @@
 ![A screenshot of your application. Could be a GIF.](screenshot.png)
 
 TODO: Short abstract describing the main goals and how you achieved them.
+
 Help users find top travel choices in North America. Achieved by interactive data visualization and taking user input to provide suggestions.
 
 ## Project Goals
 
 TODO: **A clear description of the goals of your project.** Describe the question that you are enabling a user to answer. The question should be compelling and the solution should be focused on helping users achieve their goals. 
 
-Our goal is to help users identify top travel choices in North America by month.
+Our goal is to help users identify top travel choices in North America. We are able to help users regardless of whether they know when and where to travel.
 
 ## Design
 
@@ -33,3 +34,4 @@ By now if the user is still unsure where to travel to, we will provide them with
 ## Development
 
 TODO: **An overview of your development process.** Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?
+
