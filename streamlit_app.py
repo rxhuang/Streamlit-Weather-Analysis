@@ -53,7 +53,7 @@ table_weather=table_weather[st_ms]
 mask_states = table_weather['state'].isin(st_state)
 table_weather = table_weather[mask_states]
 
-if not table_weather.empty:
+if not table_weather.empty and len(table_weather.columns)>1:
 	st.table(table_weather.groupby("state").mean())
 
 
