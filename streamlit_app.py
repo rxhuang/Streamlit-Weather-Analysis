@@ -37,7 +37,7 @@ table_weather=table_weather.dropna(subset=['month'])
 table_weather['month'] = table_weather['month'].astype(int) 
 
 #choose measurement
-cols = ['state','elevation','Average temperature (F)','Average daily wind speed (miles / hour)', "Snow depth (inch)",'Snowfall (inch)','Precipitation (inch)']
+cols = ['elevation','Average temperature (F)','Average daily wind speed (miles / hour)', "Snow depth (inch)",'Snowfall (inch)','Precipitation (inch)']
 st_ms = st.multiselect("Please select measurements of your interest", cols, default=cols)
  
 #choose month
@@ -47,8 +47,9 @@ months = st.slider("Please select range of month of your interest", min(table_we
 states = table_weather['state'].unique()
 st_state = st.multiselect("Please select state of your interest", states)
 
-table_weather=table_weather[st_ms]
 table_weather=table_weather[(table_weather['month']<=months[1]) & (table_weather['month']>=months[0])]
+st_ms.append('state')
+table_weather=table_weather[st_ms]
 mask_states = table_weather['state'].isin(st_state)
 table_weather = table_weather[mask_states]
 
