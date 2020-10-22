@@ -20,13 +20,6 @@ def load_data(path):
 
 weather=load_data("weather.csv")
 
-#part0: map of our stations
-st.title("Locations of our data gathering stations")
-
-weather1 = weather[weather['state'] != 'MP']
-weather1 = weather1[weather1['state'] != 'GU']
-st.map(weather1[['latitude','longitude']],1.7)
-
 #part1: a table with average temperature, windspeed snow, precipitation elevation, for each state, cna choose time range
 st.title("Average measurement for each state")
 
@@ -110,7 +103,7 @@ st.write(bar)
 st.title("Top 10 states to travel to!")
 option1 = st.selectbox(
     'Which month are you planning to travel?',
-     range(min(weather.month),max(weather.month)+1))
+     range(int(min(weather.month)),int(max(weather.month)+1)))
 sc = weather[weather['month'] == option1]
 sc = sc[['state','Precipitation (inch)','Average temperature (F)']]
 sc = sc.groupby(['state'], as_index=False).mean()
@@ -133,3 +126,4 @@ scatter_chart = st.altair_chart(
         .encode(x='Average temperature (F)', y='Precipitation (inch)', color='state')
         .interactive()
 )
+
