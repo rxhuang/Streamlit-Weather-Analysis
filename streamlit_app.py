@@ -53,7 +53,8 @@ table_weather=table_weather[st_ms]
 mask_states = table_weather['state'].isin(st_state)
 table_weather = table_weather[mask_states]
 
-st.table(table_weather.groupby("state").mean())
+if table_weather:
+	st.table(table_weather.groupby("state").mean())
 
 
 #part 2: a lineplot with average over 12 months
