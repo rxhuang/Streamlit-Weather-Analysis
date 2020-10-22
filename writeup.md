@@ -35,3 +35,4 @@ By now if the user is still unsure where to travel to, we will provide them with
 
 TODO: **An overview of your development process.** Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?
 
+We came up with the choice of dataset and question together. Xinyi Xu focuesed on Visualization 2-4, and Ruoxin Huang focused on Visualization 1 and 5. We roughly each spent 15 hours, totaling 30 hours. The process of deciding what question to answer and which visualization to use took the most time. 
