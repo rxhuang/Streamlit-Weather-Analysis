@@ -20,6 +20,8 @@ def load_data(path):
 
 weather=load_data("weather.csv")
 
+st.title("Let`s explore travel destinations with fine weather in North America!")
+
 #part0: map of our stations
 st.title("Locations of our data gathering stations")
 
@@ -28,7 +30,7 @@ weather1 = weather1[weather1['state'] != 'GU']
 st.map(weather1[['latitude','longitude']].dropna(),1.7)
 
 #part1: a table with average temperature, windspeed snow, precipitation elevation, for each state, cna choose time range
-st.title("Average measurement for each state")
+st.title("Already have a state in mind? Check out the weather there!")
 
 table_weather=weather[['state','elevation','Average temperature (F)','Average daily wind speed (miles / hour)','Snowfall (inch)', "Snow depth (inch)",'Precipitation (inch)','month']]
 table_weather=table_weather.dropna(subset=['month'])
@@ -55,7 +57,7 @@ st.table(table_weather.groupby("state").mean())
 
 
 #part 2: a lineplot with average over 12 months
-st.title("Average measurement for each month")
+st.title("Don`t know when to travel? Explore weather measurements for all months!")
 
 table_month=weather[['Average temperature (F)','Minimum temperature (F)','Maximum temperature (F)',\
 'Average daily wind speed (miles / hour)','Snowfall (inch)', "Snow depth (inch)",'Precipitation (inch)',\
@@ -81,7 +83,7 @@ st.write(line)
 
 
 #part 3 average measurement for different elevation
-st.title("Average measurement for different elevation")
+st.title("Looking to hike? Check weather measurements by elevation!")
 
 table_elevation=weather[['Average temperature (F)','Minimum temperature (F)','Maximum temperature (F)',\
 'Average daily wind speed (miles / hour)','Snowfall (inch)', "Snow depth (inch)",'Precipitation (inch)',\
@@ -107,7 +109,7 @@ bar = alt.Chart(table_elevation).mark_bar().encode(
 st.write(bar)
 
 #part 4 top 10 states
-st.title("Top 10 states to travel to!")
+st.title("Still undecided? Tell us your preference and we will recommend top 10 states to travel to!")
 option1 = st.selectbox(
     'Which month are you planning to travel?',
      range(int(min(weather.month)),int(max(weather.month)+1)))
